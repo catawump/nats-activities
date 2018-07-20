@@ -1,0 +1,78 @@
+﻿@using DefaultProject.Models
+
+<div>
+
+<h2>Welcome @ViewBag.currentUser.first_name @ViewBag.currentUser.last_name!</h2>
+
+<div style="float: right; margin-top: -45px;">
+<a href="/dashboard" class="btn btn-primary">Home</a>
+
+<a href="/logout" class="btn btn-danger">Log Out</a>
+
+</div>
+
+<hr>
+
+</div>
+
+
+<h2>List of Activities</h2>
+<a href="/past">View Past Activities</a><br><br>
+
+@{
+        if(@TempData["message"] != null){
+            <p><b>@TempData["message"]</b></p><br>
+        }
+    }
+
+<table class="table">
+    <tr>
+        <th>Activity</th>
+        <th>Coordinator</th>
+        <th>Date & Time</th>
+        <th>Duration</th>
+        <th>Number of Participants</th>
+        <th>Actions</th>
+    </tr>
+    
+    @{
+        foreach(var activity in @ViewBag.allActivityEvents){
+            <tr>
+                <td><a href="/Home/activity/@activity.id">@activity.title</a></td>
+                <td>@activity.creator.first_name</td>
+                <td>@activity.date</td>
+                <td>@activity.duration @activity.durationtime</td>
+                <td>@activity.rsvps.Count</td>
+                <td>
+                    @if (@activity.creator.id == @ViewBag.currentUser.id){
+                        <form action="/delete/@activity.id" method="POST">
+                            <input type="submit" value="Delete" class="btn btn-danger">
+                        </form>
+                    }
+                    else{
+                        bool print = true;
+                        foreach (var rsvp in @ViewBag.rsvps_cool){
+                            @if (rsvp.user.id == @ViewBag.currentUser.id && rsvp.activity.id == @activity.id){
+                                print = false;
+                            }
+                        }
+                        @if (print){
+                            <form action="/rsvp/@activity.id" method="POST">
+                            <input type="submit" value="Join" class="btn btn-primary">
+                            </form>
+                        }
+                        else{
+                            <form action="/rsvp/@activity.id" method="POST">
+                            <input type="submit" value="Leave" class="btn btn-primary">
+                            </form>
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+
+<a href="Home/createActivity" class="btn btn-success">Add New Activity!</a>
+

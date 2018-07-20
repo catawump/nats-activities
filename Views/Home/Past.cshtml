@@ -1,0 +1,63 @@
+﻿@using DefaultProject.Models
+
+<div>
+
+<h2>Welcome @ViewBag.currentUser.first_name @ViewBag.currentUser.last_name!</h2>
+
+<div style="float: right; margin-top: -45px;">
+<a href="/dashboard" class="btn btn-primary">Home</a>
+
+<a href="/logout" class="btn btn-danger">Log Out</a>
+
+</div>
+
+<hr>
+
+</div>
+
+
+<h2>Past Activities</h2>
+<a href="/dashboard">View Current Activities</a><br><br>
+
+@{
+        if(@TempData["message"] != null){
+            <p><b>@TempData["message"]</b></p><br>
+        }
+    }
+
+<table class="table">
+    <tr>
+        <th>Activity</th>
+        <th>Coordinator</th>
+        <th>Date & Time</th>
+        <th>Duration</th>
+        <th>Number of Participants</th>
+        <th>Actions</th>
+    </tr>
+    
+    @{
+        foreach(var activity in @ViewBag.allActivityEvents){
+            <tr>
+                <td>@activity.title</td>
+                <td>@activity.creator.first_name</td>
+                <td>@activity.date</td>
+                <td>@activity.duration @activity.durationtime</td>
+                <td>@activity.rsvps.Count</td>
+                <td>
+                    @if (@activity.creator.id == @ViewBag.currentUser.id){
+                        <form action="/delete/@activity.id" method="POST">
+                            <input type="submit" value="Delete" class="btn btn-danger">
+                        </form>
+                    }
+                    else{
+                        <a href="#" class="btn btn-warning" style="background-color: rgb(170, 170, 170); border: rgb(94, 94, 94); color: grey;">Delete</a>
+                    }
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+
+<a href="Home/createActivity" class="btn btn-success">Add New Activity!</a>
+
