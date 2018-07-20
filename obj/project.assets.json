@@ -13493,11 +13493,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Nat\\Documents\\coding-dojo-exams\\csharp-belt\\DefaultProject.csproj",
+      "projectUniqueName": "c:\\Users\\Nat\\Documents\\coding-dojo-exams\\nats-activities\\DefaultProject.csproj",
       "projectName": "DefaultProject",
-      "projectPath": "C:\\Users\\Nat\\Documents\\coding-dojo-exams\\csharp-belt\\DefaultProject.csproj",
+      "projectPath": "c:\\Users\\Nat\\Documents\\coding-dojo-exams\\nats-activities\\DefaultProject.csproj",
       "packagesPath": "C:\\Users\\Nat\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Nat\\Documents\\coding-dojo-exams\\csharp-belt\\obj\\",
+      "outputPath": "c:\\Users\\Nat\\Documents\\coding-dojo-exams\\nats-activities\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
